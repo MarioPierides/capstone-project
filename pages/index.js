@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { useState } from 'react';
+import { nanoid } from 'nanoid';
 
 const Title = styled.h1`
   font-size: 50px;
@@ -17,7 +18,10 @@ export default function Home() {
     const location = event.target.elements.location.value;
     const activity = event.target.activities.value;
 
-    setMeetings(prevState => [...prevState, { titel, location, activity }]);
+    setMeetings(prevState => [
+      ...prevState,
+      { titel, location, activity, id: nanoid() },
+    ]);
 
     console.log(titel);
     console.log(location);
@@ -58,7 +62,7 @@ export default function Home() {
       <ul>
         {meetings.map(meeting => {
           return (
-            <li>
+            <li key={meeting.id}>
               <div>{meeting.titel}</div>
               <div>{meeting.location}</div>
               <div>{meeting.activity}</div>
