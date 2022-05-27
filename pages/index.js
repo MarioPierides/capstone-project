@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import StyledButton from '../components/Button';
 import Title from '../components/Header';
+import { nanoid } from 'nanoid';
 
 export default function Home() {
   const [meetings, setMeetings] = useState([]);
@@ -13,28 +14,19 @@ export default function Home() {
   }
 
   function handleSubmit(event) {
-    //console.log(event);
     event.preventDefault();
 
     const form = event.target;
 
-    const titel = form.titel.value;
-    const location = form.location.value;
+    const title = form.title.value;
+    const location = form.locations.value;
     const activity = form.activities.value;
-    const altersgruppe = getAgeGroups([...form.altersgruppe]);
-
-    console.log(altersgruppe);
-
-    //console.log(event.target.elements);
+    const ageGroupe = getAgeGroups([...form.ageGroupe]);
 
     setMeetings(allPrevMeetings => [
       ...allPrevMeetings,
-      { titel, location, activity, altersgruppe },
+      { title, location, activity, ageGroupe, id: nanoid() },
     ]);
-
-    //console.log(titel);
-    //console.log(location);
-    //console.log(activity);
   }
   return (
     <>
@@ -42,12 +34,12 @@ export default function Home() {
       <form onSubmit={handleSubmit}>
         <div>
           <label>Titel</label>
-          <input type="text" name="titel" placeholder="Titel" required />
+          <input type="text" name="title" placeholder="Titel" required />
         </div>
         <div>
           <label>Standorte</label>
-          <select name="location">
-            <option value="auswahl">Bitte auswählen</option>
+          <select name="locations">
+            <option value="">Bitte auswählen</option>
             <option value="stadtpark">Stadtpark</option>
             <option value="elbe">Elbe</option>
             <option value="alster">Alster</option>
@@ -70,7 +62,7 @@ export default function Home() {
                 <label htmlFor="welpen">Welpen</label>
                 <input
                   type="checkbox"
-                  name="altersgruppe"
+                  name="ageGroupe"
                   id="welpen"
                   data-displayname="Welpen"
                 />
@@ -79,7 +71,7 @@ export default function Home() {
                 <label htmlFor="junghunde">Junghunde</label>
                 <input
                   type="checkbox"
-                  name="altersgruppe"
+                  name="ageGroupe"
                   id="junghunde"
                   data-displayname="Junghunde"
                 />
@@ -88,7 +80,7 @@ export default function Home() {
                 <label htmlFor="erwachsen">Erwachsen</label>
                 <input
                   type="checkbox"
-                  name="altersgruppe"
+                  name="ageGroupe"
                   id="erwachsen"
                   data-displayname="Erwachsen"
                 />
@@ -97,7 +89,7 @@ export default function Home() {
                 <label htmlFor="senior">Senior</label>
                 <input
                   type="checkbox"
-                  name="altersgruppe"
+                  name="ageGroupe"
                   id="senior"
                   data-displayname="Senior"
                 />
@@ -112,15 +104,14 @@ export default function Home() {
       </form>
 
       <ul>
-        {meetings.map((meeting, index) => {
-          //console.log(meeting.altersgruppe);
+        {meetings.map(meeting => {
           return (
-            <li key={index}>
-              <div>{meeting.titel}</div>
-              <div>{meeting.location}</div>
-              <div>{meeting.activity}</div>
+            <li key={meeting.id}>
+              <p>{meeting.title}</p>
+              <p>{meeting.location}</p>
+              <p>{meeting.activity}</p>
               <ul>
-                {meeting.altersgruppe.map(age => {
+                {meeting.ageGroupe.map(age => {
                   return (
                     <li key={`${age}`}>
                       <div>{age}</div>
