@@ -14,18 +14,14 @@ export default function Home() {
     console.log(event);
     event.preventDefault();
 
-    const titel = event.target.elements.titel.value;
-    const location = event.target.elements.location.value;
+    const title = event.target.title.value;
+    const location = event.target.locations.value;
     const activity = event.target.activities.value;
 
     setMeetings(prevState => [
       ...prevState,
-      { titel, location, activity, id: nanoid() },
+      { title, location, activity, id: nanoid() },
     ]);
-
-    console.log(titel);
-    console.log(location);
-    console.log(activity);
   }
   return (
     <>
@@ -33,11 +29,11 @@ export default function Home() {
       <form onSubmit={handleSubmit}>
         <div>
           <label>Titel</label>
-          <input type="text" name="titel" placeholder="Titel" required />
+          <input type="text" name="title" placeholder="Titel" required />
         </div>
         <div>
           <label>Standorte</label>
-          <select name="location">
+          <select name="locations">
             <option value="">Bitte auswählen</option>
             <option value="stadtpark">Stadtpark</option>
             <option value="elbe">Elbe</option>
@@ -63,9 +59,9 @@ export default function Home() {
         {meetings.map(meeting => {
           return (
             <li key={meeting.id}>
-              <div>{meeting.titel}</div>
-              <div>{meeting.location}</div>
-              <div>{meeting.activity}</div>
+              <p>{meeting.title}</p>
+              <p>{meeting.location}</p>
+              <p>{meeting.activity}</p>
             </li>
           );
         })}
