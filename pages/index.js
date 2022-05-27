@@ -7,8 +7,8 @@ import { nanoid } from 'nanoid';
 export default function Home() {
   const [meetings, setMeetings] = useState([]);
 
-  function getAgeGroups(ageGroups) {
-    return ageGroups
+  function getAgeGroup(ageGroup) {
+    return ageGroup
       .filter(age => age.checked)
       .map(age => age.dataset.displayname);
   }
@@ -21,11 +21,11 @@ export default function Home() {
     const title = form.title.value;
     const location = form.locations.value;
     const activity = form.activities.value;
-    const ageGroupe = getAgeGroups([...form.ageGroupe]);
+    const ageGroup = getAgeGroup([...form.ageGroup]);
 
     setMeetings(allPrevMeetings => [
       ...allPrevMeetings,
-      { title, location, activity, ageGroupe, id: nanoid() },
+      { title, location, activity, ageGroup, id: nanoid() },
     ]);
   }
   return (
@@ -62,7 +62,7 @@ export default function Home() {
                 <label htmlFor="welpen">Welpen</label>
                 <input
                   type="checkbox"
-                  name="ageGroupe"
+                  name="ageGroup"
                   id="welpen"
                   data-displayname="Welpen"
                 />
@@ -71,7 +71,7 @@ export default function Home() {
                 <label htmlFor="junghunde">Junghunde</label>
                 <input
                   type="checkbox"
-                  name="ageGroupe"
+                  name="ageGroup"
                   id="junghunde"
                   data-displayname="Junghunde"
                 />
@@ -80,7 +80,7 @@ export default function Home() {
                 <label htmlFor="erwachsen">Erwachsen</label>
                 <input
                   type="checkbox"
-                  name="ageGroupe"
+                  name="ageGroup"
                   id="erwachsen"
                   data-displayname="Erwachsen"
                 />
@@ -89,7 +89,7 @@ export default function Home() {
                 <label htmlFor="senior">Senior</label>
                 <input
                   type="checkbox"
-                  name="ageGroupe"
+                  name="ageGroup"
                   id="senior"
                   data-displayname="Senior"
                 />
@@ -111,7 +111,7 @@ export default function Home() {
               <p>{meeting.location}</p>
               <p>{meeting.activity}</p>
               <ul>
-                {meeting.ageGroupe.map(age => {
+                {meeting.ageGroup.map(age => {
                   return (
                     <li key={`${age}`}>
                       <div>{age}</div>
