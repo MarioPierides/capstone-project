@@ -1,8 +1,7 @@
-import styled from 'styled-components';
 import { useState } from 'react';
+import { nanoid } from 'nanoid';
 import StyledButton from '../components/Button';
 import Title from '../components/Header';
-import { nanoid } from 'nanoid';
 
 export default function Home() {
   const [meetings, setMeetings] = useState([]);
