@@ -16,12 +16,12 @@ export default function Home() {
     //console.log(event);
     event.preventDefault();
 
-    const formData = event.target.elements;
+    const form = event.target;
 
-    const titel = formData.titel.value;
-    const location = formData.location.value;
-    const activity = formData.activities.value;
-    const altersgruppe = getAgeGroups([...formData.altersgruppe]);
+    const titel = form.titel.value;
+    const location = form.location.value;
+    const activity = form.activities.value;
+    const altersgruppe = getAgeGroups([...form.altersgruppe]);
 
     console.log(altersgruppe);
 
