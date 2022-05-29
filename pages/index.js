@@ -8,8 +8,8 @@ export default function Home() {
 
   function getAgeGroup(ageGroup) {
     return ageGroup
-      .filter(age => age.checked)
-      .map(age => age.dataset.displayname);
+      .filter(ageElement => ageElement.checked)
+      .map(ageElement => ageElement.dataset.displayname);
   }
 
   function handleSubmit(event) {
@@ -110,10 +110,10 @@ export default function Home() {
               <p>{meeting.location}</p>
               <p>{meeting.activity}</p>
               <ul>
-                {meeting.ageGroup.map(age => {
+                {meeting.ageGroup.map(ageElement => {
                   return (
-                    <li key={`${age}`}>
-                      <div>{age}</div>
+                    <li key={ageElement}>
+                      <p>{ageElement}</p>
                     </li>
                   );
                 })}
