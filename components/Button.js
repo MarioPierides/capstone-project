@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styledComponents from 'styled-components';
 
-const StyledButton = styled.button`
+const StyledButton = styledComponents.button`
   min-width: 60px;
   min-height: 30px;
   padding: 10px;

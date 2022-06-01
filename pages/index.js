@@ -1,3 +1,5 @@
+import Link from 'next/link';
+import Navbar from '../components/Navbar';
 import { useState } from 'react';
 import { nanoid } from 'nanoid';
 import StyledButton from '../components/Button';
@@ -43,6 +45,7 @@ export default function Home() {
   return (
     <>
       <Title>Erstelle deinen Treffpunkt</Title>
+
       <form onSubmit={handleSubmit}>
         <section>
           <div>
@@ -143,6 +146,7 @@ export default function Home() {
         </section>
       </form>
       <Meetings meetings={meetings} />
+      <Navbar />
     </>
   );
 }
