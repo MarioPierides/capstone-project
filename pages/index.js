@@ -50,6 +50,7 @@ export default function Home() {
             <input
               type="text"
               name="title"
+              maxLength={30}
               placeholder="Titel"
               value={title}
               onChange={handleTitleChange}
@@ -121,6 +122,7 @@ export default function Home() {
             <label htmlFor="description">Beschreibung</label>
             <textarea
               name="description"
+              maxLength={300}
               rows="4"
               cols="50"
               placeholder="Text - Beschreibung"
