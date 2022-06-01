@@ -2,27 +2,30 @@ import { useState } from 'react';
 import { nanoid } from 'nanoid';
 import StyledButton from '../components/Button';
 import Title from '../components/Header';
+import { today } from '../utils/date';
+import { getAgeGroup } from '../utils/extract';
+import Meetings from '../components/Meetings';
 
 export default function Home() {
   const [meetings, setMeetings] = useState([]);
 
-  function getAgeGroup(ageGroup) {
-    return ageGroup
-      .filter(ageElement => ageElement.checked)
-      .map(ageElement => ageElement.dataset.displayname);
+  const [title, setTitle] = useState('');
+  function handleTitleChange(event) {
+    const newTitle = event.target.value.trimStart();
+    console.log(newTitle);
+    setTitle(newTitle);
   }
 
   function handleSubmit(event) {
     event.preventDefault();
 
     const form = event.target;
-
-    const title = form.title.value;
+    const title = form.title.value.trimEnd();
     const location = form.locations.value;
     const activity = form.activities.value;
     const ageGroup = getAgeGroup([...form.ageGroup]);
-    const beschreibung = form.beschreibung.value;
-    const kalender = form.kalender.value;
+    const description = form.description.value;
+    const calendar = form.calendar.value;
 
     setMeetings(allPrevMeetings => [
       ...allPrevMeetings,
@@ -31,24 +34,31 @@ export default function Home() {
         location,
         activity,
         ageGroup,
-        beschreibung,
-        kalender,
+        description,
+        calendar,
         id: nanoid(),
       },
     ]);
   }
   return (
     <>
-      <Title>Erstelle dein Treffpunkt</Title>
+      <Title>Erstelle deinen Treffpunkt</Title>
       <form onSubmit={handleSubmit}>
         <section>
           <div>
             <label>Titel</label>
-            <input type="text" name="title" placeholder="Titel" required />
+            <input
+              type="text"
+              name="title"
+              placeholder="Titel"
+              value={title}
+              onChange={handleTitleChange}
+              required
+            />
           </div>
           <div>
             <label>Standorte</label>
-            <select name="locations">
+            <select name="locations" required>
               <option value="">Bitte auswählen</option>
               <option value="stadtpark">Stadtpark</option>
               <option value="elbe">Elbe</option>
@@ -57,8 +67,8 @@ export default function Home() {
           </div>
           <div>
             <label>Aktivitäten</label>
-            <select name="activities">
-              <option value="auswahl">Bitte auswählen</option>
+            <select name="activities" required>
+              <option value="">Bitte auswählen</option>
               <option value="gassigehen">Gassi gehen</option>
               <option value="sport">Sport</option>
               <option value="otherthings">Sonstiges</option>
@@ -108,10 +118,11 @@ export default function Home() {
         </section>
         <section>
           <div>
-            <label>Beschreibung</label>
+            <label htmlFor="description">Beschreibung</label>
             <textarea
-              text="aaa"
-              name="beschreibung"
+              name="description"
+              rows="4"
+              cols="50"
               placeholder="Text - Beschreibung"
             />
           </div>
@@ -119,7 +130,7 @@ export default function Home() {
         <section>
           <div>
             <label>Kalender</label>
-            <input type="date" name="kalender" />
+            <input type="date" name="calendar" min={today} required />
           </div>
         </section>
 
@@ -129,29 +140,7 @@ export default function Home() {
           </div>
         </section>
       </form>
-
-      <ul>
-        {meetings.map(meeting => {
-          return (
-            <li key={meeting.id}>
-              <p>{meeting.title}</p>
-              <p>{meeting.location}</p>
-              <p>{meeting.activity}</p>
-              <ul>
-                {meeting.ageGroup.map(ageElement => {
-                  return (
-                    <li key={ageElement}>
-                      <p>{ageElement}</p>
-                    </li>
-                  );
-                })}
-              </ul>
-              <p>{meeting.kalender}</p>
-              <p>{meeting.beschreibung}</p>
-            </li>
-          );
-        })}
-      </ul>
+      <Meetings meetings={meetings} />
     </>
   );
 }
