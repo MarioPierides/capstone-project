@@ -1,16 +1,11 @@
 import { ThemeProvider } from 'styled-components';
-import GlobalStyle from '../components/GlobalStyles';
-
-const theme = {
-  colors: {
-    primary: '#0510f6',
-  },
-};
+import GlobalStyles from '../components/GlobalStyles';
+import { theme } from '../components/GlobalStyles';
 
 function App({ Component, pageProps }) {
   return (
     <>
-      <GlobalStyle />
+      <GlobalStyles />
       <ThemeProvider theme={theme}>
         <Component {...pageProps} />
       </ThemeProvider>

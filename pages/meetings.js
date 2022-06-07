@@ -1,15 +1,31 @@
+import { useState, useEffect } from 'react';
 import Title from '../components/Header';
-import Link from 'next/link';
 import Navbar from '../components/Navbar';
+import MeetingsList from '../components/MeetingsList';
+
 
 export default function Meetings() {
+  const [meetings, setMeetings] = useState([]);
+
+  function getMeetings() {
+    const fetchedMeetings = JSON.parse(localStorage.getItem('meetings'));
+
+    if (!fetchedMeetings) {
+      return;
+    }
+
+    setMeetings(fetchedMeetings);
+  }
+
+  useEffect(() => {
+    getMeetings();
+  }, []);
+
   return (
     <>
       <Title>Deine Meetings</Title>
-      <Link passHref href="/meetings">
-        <a></a>
-      </Link>
-      <Navbar></Navbar>
+      {meetings && <MeetingsList meetingsList={meetings} />}
+      <Navbar />
     </>
   );
 }
