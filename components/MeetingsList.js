@@ -1,7 +1,15 @@
-export default function Meetings({ meetings }) {
+import styledComponents from 'styled-components';
+
+const CardList = styledComponents.ul`
+display: grid;
+grid-gap: 20px;
+
+`;
+
+export default function MeetingsList({ meetingsList }) {
   return (
-    <ul>
-      {meetings.map(meeting => {
+    <CardList style={{ margin: '0', padding: '0' }}>
+      {meetingsList.map(meeting => {
         return (
           <li key={meeting.id}>
             <p>{meeting.title}</p>
@@ -21,6 +29,6 @@ export default function Meetings({ meetings }) {
           </li>
         );
       })}
-    </ul>
+    </CardList>
   );
 }
