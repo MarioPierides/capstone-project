@@ -9,8 +9,6 @@ const HomeStyles = createGlobalStyle`
     background-attachment: fixed;
     background-repeat: no-repeat;
   }
-  
-
 `;
 
 export default HomeStyles;

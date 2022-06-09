@@ -1,6 +1,6 @@
-import styledComponents from 'styled-components';
+import styled from 'styled-components';
 
-const StyledButton = styledComponents.button`
+const CreateAppointment = styled.button`
   min-width: 60px;
   min-height: 30px;
   padding: 10px;
@@ -14,4 +14,4 @@ const StyledButton = styledComponents.button`
   }
 `;
 
-export default StyledButton;
+export default CreateAppointment;

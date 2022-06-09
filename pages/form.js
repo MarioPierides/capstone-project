@@ -1,7 +1,7 @@
 import Navbar from '../components/Navbar';
 import { useState } from 'react';
 import { nanoid } from 'nanoid';
-import StyledButton from '../components/Button';
+import CreateAppointment from '../components/Button';
 import Title from '../components/Header';
 import { today } from '../utils/date';
 import { getAgeGroup } from '../utils/extract';
@@ -29,7 +29,7 @@ export default function FormPage() {
     const activity = form.activities.value;
     const ageGroup = getAgeGroup([...form.ageGroup]);
     const description = form.description.value;
-    const calendar = form.calendar.value;
+    const date = form.date.value;
 
 
     const newMeeting = {
@@ -38,7 +38,7 @@ export default function FormPage() {
       activity,
       ageGroup,
       description,
-      calendar,
+      date,
       id: nanoid(),
     };
 
@@ -146,13 +146,13 @@ export default function FormPage() {
         <section>
           <div>
             <label>Kalender</label>
-            <input type="date" name="calendar" min={today} required />
+            <input type="date" name="date" min={today} required />
           </div>
         </section>
 
         <section>
           <div>
-            <StyledButton>ADD</StyledButton>
+            <CreateAppointment>Hinzufügen</CreateAppointment>
           </div>
         </section>
       </form>
