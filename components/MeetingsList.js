@@ -1,34 +1,22 @@
-import styledComponents from 'styled-components';
+import styled from 'styled-components';
 
-const CardList = styledComponents.ul`
-display: grid;
-grid-gap: 20px;
+import Card from '../components/Card';
 
-`;
-
-export default function MeetingsList({ meetingsList }) {
+function MeetingsList({ meetingsList }) {
   return (
-    <CardList style={{ margin: '0', padding: '0' }}>
+    <StyledMeetingsList>
       {meetingsList.map(meeting => {
-        return (
-          <li key={meeting.id}>
-            <p>{meeting.title}</p>
-            <p>{meeting.location}</p>
-            <p>{meeting.activity}</p>
-            <ul>
-              {meeting.ageGroup.map(ageElement => {
-                return (
-                  <li key={ageElement}>
-                    <p>{ageElement}</p>
-                  </li>
-                );
-              })}
-            </ul>
-            <p>{meeting.calendar}</p>
-            <p>{meeting.description}</p>
-          </li>
-        );
+        return <Card meeting={meeting} key={meeting.id} />;
       })}
-    </CardList>
+    </StyledMeetingsList>
   );
 }
+
+export default MeetingsList;
+
+const StyledMeetingsList = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  margin: 20px 0 0 0;
+  padding: 0;
+`;

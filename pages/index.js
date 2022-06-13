@@ -1,13 +1,19 @@
-import Navbar from '../components/Navbar';
+import Head from 'next/head';
+import styledComponents from 'styled-components';
+
 import Title from '../components/Header';
-import HomeStyles from '../components/HomeStyles';
+import Stage from '../components/Stage';
+import Intro from '../components/Intro';
 
 export default function Home() {
   return (
     <>
-      <HomeStyles />
-      <Title>Puppies Date</Title>
-      <Navbar />
+      <Head>
+        <title>Home</title>
+      </Head>
+      <Title>Puppy Date</Title>
+      <Stage />
+      <Intro />
     </>
   );
 }

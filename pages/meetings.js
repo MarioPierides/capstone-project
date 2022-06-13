@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
 import Title from '../components/Header';
-import Navbar from '../components/Navbar';
 import MeetingsList from '../components/MeetingsList';
 
 
-export default function Meetings() {
+function Meetings() {
   const [meetings, setMeetings] = useState([]);
 
   function getMeetings() {
@@ -23,9 +22,10 @@ export default function Meetings() {
 
   return (
     <>
-      <Title>Deine Meetings</Title>
+      <Title>Treffen in deiner Nähe</Title>
       {meetings && <MeetingsList meetingsList={meetings} />}
-      <Navbar />
     </>
   );
 }
+
+export default Meetings;
