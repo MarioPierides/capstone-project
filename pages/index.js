@@ -1,22 +1,19 @@
+import Head from 'next/head';
 import styledComponents from 'styled-components';
 
 import Title from '../components/Header';
 import Stage from '../components/Stage';
-import Navbar from '../components/Navbar';
+import Intro from '../components/Intro';
 
 export default function Home() {
   return (
-    <Main>
+    <>
+      <Head>
+        <title>Home</title>
+      </Head>
       <Title>Puppy Date</Title>
       <Stage />
-      <Navbar />
-    </Main>
+      <Intro />
+    </>
   );
 }
-
-const Main = styledComponents.div`
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  position: relativ;
-`;

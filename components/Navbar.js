@@ -1,61 +1,64 @@
-import styledComponents, { css } from 'styled-components';
+import styled, { css } from 'styled-components';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import Icon from '@mdi/react';
+import { mdiHome, mdiViewList, mdiPlaylistPlus } from '@mdi/js';
+
+const StyledNav = styled.nav`
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+`;
+
+const NavSideButton = styled.button`
+  align-items: center;
+  background-color: ${({ isActive }) => (isActive ? 'green' : 'green')};
+  color: ${({ isActive }) => (isActive ? 'white' : 'darkgray')};
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  width: 40%;
+`;
+
+const NavCenterButton = styled.button`
+  align-items: center;
+  background-color: ${({ isActive }) => (isActive ? 'green' : 'green')};
+  color: ${({ isActive }) => (isActive ? 'white' : 'darkgray')};
+  border-radius: 120px 120px 0 0;
+  display: flex;
+  flex-direction: column;
+  height: 60px;
+  justify-content: center;
+  left: 50%;
+  position: absolute;
+  transform: translateX(-50%);
+  bottom: 0;
+  width: 110px;
+`;
 
 export default function Navbar() {
   const router = useRouter();
+
   return (
-    <StyledNavbar>
+    <StyledNav>
       <Link passHref href="/">
-        <StyledLinkNav isActive={router.pathname === '/'}>Home</StyledLinkNav>
+        <NavSideButton isActive={router.pathname === '/'}>
+          <Icon path={mdiHome} title="Home" size={1} />
+          <div>Home</div>
+        </NavSideButton>
       </Link>
-
-      <Link passHref href="/form">
-        <StyledLinkNav isActive={router.pathname === '/form'}>
-          Erstelle
-        </StyledLinkNav>
+      <Link passHref href="/create-meeting">
+        <NavCenterButton isActive={router.pathname === '/create-meeting'}>
+          <Icon path={mdiPlaylistPlus} title="Erstelle ein Meeting" size={1} />
+          <div>Meeting</div>
+        </NavCenterButton>
       </Link>
-
       <Link passHref href="/meetings">
-        <StyledLinkNav isActive={router.pathname === '/meetings'}>
-          Liste
-        </StyledLinkNav>
+        <NavSideButton isActive={router.pathname === '/meetings'}>
+          <Icon path={mdiViewList} title="Meetings" size={1} />
+          <div>Meetings</div>
+        </NavSideButton>
       </Link>
-    </StyledNavbar>
+    </StyledNav>
   );
 }
-
-const StyledNavbar = styledComponents.nav`
-
-${({ theme }) => css`
-  background-color: ${theme.colors.background};
-`}
-  display: flex;
-  position: fixed;
-  justify-content: space-around;
-  align-items: center;
-  gap: 10px;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 0;
-  border-radius: 20px;
-  height: 50px;
-`;
-
-const StyledLinkNav = styledComponents.a`
-
-  color: ${({ isActive }) => (isActive ? 'black' : 'grey')};
-  box-shadow: ${({ isActive }) => (isActive ? '5px 3px 5px black' : 'none')};
-  
-  background-color: whitesmoke;
-  font-size: 17px;
-  font-weight: 800;
-  text-align: center;
-  text-decoration: none;
-  padding: 10px;
-  margin: 10px;
-  border-radius: 20px;
-  border: 1px solid transparent;
-  width: 125px;
-`;

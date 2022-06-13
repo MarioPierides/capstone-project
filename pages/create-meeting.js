@@ -1,11 +1,13 @@
-import Navbar from '../components/Navbar';
 import { useState } from 'react';
 import { nanoid } from 'nanoid';
-import CreateAppointment from '../components/Button';
-import Title from '../components/Header';
+import { useRouter } from 'next/router';
+import styled from 'styled-components';
+
 import { today } from '../utils/date';
 import { getAgeGroup } from '../utils/extract';
-import { useRouter } from 'next/router';
+
+import CreateAppointment from '../components/Button';
+import Title from '../components/Header';
 
 export default function FormPage() {
   const router = useRouter();
@@ -55,12 +57,11 @@ export default function FormPage() {
   }
   return (
     <>
-      <Title>Erstelle deinen Treffpunkt</Title>
+      <Title>Stelle jetzt dein Treffen ein!</Title>
 
       <form onSubmit={handleSubmit}>
         <section>
-          <div>
-            <label>Titel</label>
+          <FormElement>
             <input
               type="text"
               name="title"
@@ -70,29 +71,27 @@ export default function FormPage() {
               onChange={handleTitleChange}
               required
             />
-          </div>
-          <div>
-            <label>Standorte</label>
+          </FormElement>
+          <FormElement>
             <select name="locations" required>
-              <option value="">Bitte auswählen</option>
+              <option value="">Standort auswählen</option>
               <option value="stadtpark">Stadtpark</option>
               <option value="elbe">Elbe</option>
               <option value="alster">Alster</option>
             </select>
-          </div>
-          <div>
-            <label>Aktivitäten</label>
+          </FormElement>
+          <FormElement>
             <select name="activities" required>
-              <option value="">Bitte auswählen</option>
+              <option value="">Aktivitäten wählen</option>
               <option value="gassigehen">Gassi gehen</option>
               <option value="sport">Sport</option>
               <option value="otherthings">Sonstiges</option>
             </select>
-          </div>
+          </FormElement>
         </section>
         <section>
           <h4>Altersgruppe</h4>
-          <div>
+          <FormElement>
             <div>
               <label htmlFor="welpen">Welpen</label>
               <input
@@ -129,25 +128,25 @@ export default function FormPage() {
                 data-displayname="Senior"
               />
             </div>
-          </div>
+          </FormElement>
         </section>
         <section>
-          <div>
-            <label htmlFor="description">Beschreibung</label>
+          <FormElement>
             <textarea
               name="description"
               maxLength={300}
               rows="4"
-              cols="50"
+              cols="40"
               placeholder="Text - Beschreibung"
             />
-          </div>
+          </FormElement>
         </section>
         <section>
-          <div>
-            <label>Kalender</label>
+          <FormElement>
+            <label>Kalender:</label>
+            <br></br>
             <input type="date" name="date" min={today} required />
-          </div>
+          </FormElement>
         </section>
 
         <section>
@@ -156,7 +155,10 @@ export default function FormPage() {
           </div>
         </section>
       </form>
-      <Navbar />
     </>
   );
 }
+
+const FormElement = styled.div`
+  margin-bottom: 15px;
+`;

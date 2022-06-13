@@ -1,22 +1,27 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
+  html {
+    font-size: 0.8em;
+  }
+
+  body {
+    margin: 0 auto;
+    max-width: 420px;
+  }
+
   * {
     box-sizing: border-box;
     font-family: 'Open Sans' , sans-serif;
     margin: 0;
     padding: 0;
   }
-
-  body {
-    margin: 0 auto;
-    background-color: white;
-    padding: 0 20px;
-    max-width: 420px;
-  }
   
-  html {
-    font-size: 0.8em;
+  input[type="text"], select, textarea {
+    border-radius: 20px;
+    padding: 8px;
+    border: 1px solid green;
+    width: 100%;
   }
 `;
 

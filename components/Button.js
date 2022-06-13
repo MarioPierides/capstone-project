@@ -4,13 +4,13 @@ const CreateAppointment = styled.button`
   min-width: 60px;
   min-height: 30px;
   padding: 10px;
-  border: 2px solid red;
-  border-radius: 7px;
+  border: 2px solid green;
+  border-radius: 10px;
   cursor: pointer;
 
   &:hover {
-    color: red;
-    background: yellow;
+    color: black;
+    background: lightgreen;
   }
 `;
 
