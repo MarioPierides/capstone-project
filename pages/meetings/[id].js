@@ -12,7 +12,7 @@ import {
   mdiDog,
 } from '@mdi/js';
 
-import { useLocationImageUrl } from '../../hooks/useLocationImageUrl';
+import { getLocationImageUrl } from '../../utils/getLocationImageUrl';
 import { capitalFirstLetter } from '../../utils/capitalize';
 
 import Title from '../../components/Title';
@@ -44,7 +44,7 @@ function MeetingDetail() {
       return foundMeeting.id === query.id;
     });
 
-    const url = useLocationImageUrl(filteredMeeting.location);
+    const url = getLocationImageUrl(filteredMeeting.location);
 
     setMeeting(filteredMeeting);
     setImageUrl(url);

@@ -4,11 +4,11 @@ import styled from 'styled-components';
 import moment from 'moment-with-locales-es6';
 
 import { mdiCalendar, mdiMapMarker } from '@mdi/js';
-import { useLocationImageUrl } from '../hooks/useLocationImageUrl';
+import { getLocationImageUrl } from '../utils/getLocationImageUrl';
 import { capitalFirstLetter } from '../utils/capitalize';
 
 function Card({ meeting }) {
-  const url = useLocationImageUrl(meeting.location);
+  const url = getLocationImageUrl(meeting.location);
 
   return (
     <CardContent key={meeting.id}>
