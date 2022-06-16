@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Icon from '@mdi/react';
 import styled from 'styled-components';
+import moment from 'moment-with-locales-es6';
 
 import { mdiCalendar, mdiMapMarker } from '@mdi/js';
 import { useLocationImageUrl } from '../hooks/useLocationImageUrl';
@@ -10,39 +11,29 @@ function Card({ meeting }) {
   const url = useLocationImageUrl(meeting.location);
 
   return (
-    <StyledCard key={meeting.id}>
-      <CardContent>
+    <CardContent key={meeting.id}>
+      {url && (
         <CardImage>
           <Image src={url} width={16} height={10} layout="responsive" />
         </CardImage>
-        <CardTextWrapper>
-          <CardTitle>{meeting.title}</CardTitle>
-          <CardElement>
-            <Icon path={mdiCalendar} title="Calendar" size={1} />
-            <p>{meeting.date}</p>
-          </CardElement>
-          <CardElement>
-            <Icon path={mdiMapMarker} title="Location" size={1} />
-            <p>{capitalFirstLetter(meeting.location)}</p>
-          </CardElement>
-        </CardTextWrapper>
-      </CardContent>
-    </StyledCard>
+      )}
+
+      <CardTextWrapper>
+        <CardTitle>{meeting.title}</CardTitle>
+        <CardElement>
+          <Icon path={mdiCalendar} title="Calendar" size={1} />
+          <p>{moment(meeting.date).locale('de').format('LLL')}</p>
+        </CardElement>
+        <CardElement>
+          <Icon path={mdiMapMarker} title="Location" size={1} />
+          <p>{capitalFirstLetter(meeting.location)}</p>
+        </CardElement>
+      </CardTextWrapper>
+    </CardContent>
   );
 }
 
 export default Card;
-
-const StyledCard = styled.li`
-  min-height: 100px;
-  list-style: none;
-  padding: 0 4px;
-  width: 50%;
-
-  &:nth-child(n + 3) {
-    margin-top: 8px;
-  }
-`;
 
 const CardContent = styled.div`
   border-radius: 4px;

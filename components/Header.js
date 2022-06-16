@@ -1,9 +1,19 @@
+import Image from 'next/image';
 import styled from 'styled-components';
 
-const Title = styled.h1`
-  font-size: 40px;
-  color: ${({ theme }) => theme.colors.primary};
-  margin: 40px 0;
+import logo from '../public/assets/images/logo.png';
+
+const StyledHeader = styled.div`
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding: 6px 0;
 `;
 
-export default Title;
+export default function Header() {
+  return (
+    <StyledHeader>
+      <Image src={logo} alt="Logo" width={60} height={54} />
+    </StyledHeader>
+  );
+}

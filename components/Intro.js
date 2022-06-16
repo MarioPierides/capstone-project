@@ -4,19 +4,24 @@ function Intro() {
   return (
     <StyledIntro>
       <Paragraph>
-        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-        eirmod tempor invidunt ut labore et dolore magna aliquyam
+        Puppy Date, ist eine App speziell für Hundehalter und ihre Vierbeiner.
+        Hier könnt ihr euch miteinander vernetzen, zusammen Gassi gehen und zu
+        gemeinsamen Spiel-, Spaß- und Sportaktivitäten treffen, oder
+        verschiedene Trainingseinheiten abstimmen.
       </Paragraph>
       <Paragraph>
-        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-        eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-        voluptua. At vero eos et accusam et
+        Erstellt direkt und einfach euren eigenen Treffpunkt, mit Datum und
+        Uhrzeit, wählt eure Lieblingsorte rund um Hamburg aus, bestimmt die
+        Aktivität und die Altersgruppe der gewünschten Hunde. Gestaltet euer
+        eigenes Date oder nehmt einfach am nächsten Date teil.
       </Paragraph>
       <Paragraph>
-        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-        eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-        voluptua. At
+        Hier habt ihr und eure Vierbeiner täglich die Chance, neue Spazier- und
+        Spielfreunde oder Trainingspartner kennenzulernen, um gemeinsam Spaß zu
+        haben. Erkundet neue Ausflugsziele, bereichert euer Leben und das eurer
+        geliebten Fellnasen.
       </Paragraph>
+      <Paragraph>Vereinbart hier regelmäßig neue Dates, viel Spaß!</Paragraph>
     </StyledIntro>
   );
 }

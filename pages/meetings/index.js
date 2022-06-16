@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
-import Title from '../components/Header';
-import MeetingsList from '../components/MeetingsList';
-
+import Title from '../../components/Title';
+import MeetingsList from '../../components/MeetingsList';
 
 function Meetings() {
   const [meetings, setMeetings] = useState([]);
