@@ -1,7 +1,12 @@
 import Head from 'next/head';
 import styled, { ThemeProvider } from 'styled-components';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import GlobalStyles from '../components/GlobalStyles';
 import { theme } from '../components/GlobalStyles';
+
+import Header from '../components/Header';
 import NavBar from '../components/Navbar';
 
 function App({ Component, pageProps }) {
@@ -14,13 +19,16 @@ function App({ Component, pageProps }) {
       <GlobalStyles />
       <ThemeProvider theme={theme}>
         <StyledLayout>
-          <StyledHeader />
+          <StyledHeader>
+            <Header />
+          </StyledHeader>
           <StyledMain>
             <Component {...pageProps} />
           </StyledMain>
           <StyledFooter>
             <NavBar />
           </StyledFooter>
+          <ToastContainer position="bottom-center" autoClose={2000} />
         </StyledLayout>
       </ThemeProvider>
     </>
@@ -36,10 +44,14 @@ const StyledLayout = styled.div`
   min-height: 100vh;
 `;
 
-const StyledHeader = styled.header``;
+const StyledHeader = styled.header`
+  max-width: 420px;
+`;
 
 const StyledMain = styled.main`
+  display: flex;
   flex: 1;
+  flex-direction: column;
   padding: 0 8px 70px;
 `;
 

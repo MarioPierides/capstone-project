@@ -16,20 +16,13 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
   }
-  
-  input[type="text"], select, textarea {
-    border-radius: 20px;
-    padding: 8px;
-    border: 1px solid green;
-    width: 100%;
-  }
 `;
 
 export default GlobalStyles;
 
 export const theme = {
   colors: {
-    primary: 'green',
+    primary: 'white',
     secondary: '#FFF5D6',
     text: '#FFE085',
     background: 'green',
