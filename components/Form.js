@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { nanoid } from 'nanoid';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
+import moment from 'moment-with-locales-es6';
 import Icon from '@mdi/react';
 import { mdiSend } from '@mdi/js';
 import {
@@ -21,23 +22,23 @@ import {
 
 import styled from 'styled-components';
 
-import { today } from '../utils/date';
-
-const StyledTextareaAutosize = styled(TextareaAutosize)`
-  padding: 8px;
-  margin-bottom: 5px;
-`;
-
-export default function Form() {
+function Form({ meeting, onFormUpdate, validateForm }) {
   const router = useRouter();
+  const [isValid, setIsValid] = useState(false);
   const [form, setForm] = useState({
     title: '',
     location: '',
     activity: '',
     ageGroup: '',
     description: '',
-    date: '',
+    date: new Date(),
   });
+
+  function validateForm() {
+    const isValid = form.title && form.location && form.activity && form.date;
+
+    setIsValid(isValid);
+  }
 
   function handleFormChange(event) {
     const { name } = event.target;
@@ -51,17 +52,23 @@ export default function Form() {
       ...prevState,
       [name]: value,
     }));
+
+    if (!meeting) {
+      return;
+    }
+
+    onFormUpdate(name, value);
   }
 
   function handleSubmit(event) {
     event.preventDefault();
 
-    const title = form.title.trimEnd();
-    const location = form.location;
-    const activity = form.activity;
-    const ageGroup = form.ageGroup;
-    const description = form.description;
-    const date = form.date;
+    const title = form.title.trimEnd() || '';
+    const location = form.location || '';
+    const activity = form.activity || '';
+    const ageGroup = form.ageGroup || '';
+    const description = form.description || '';
+    const date = form.date || new Date();
 
     const newMeeting = {
       title,
@@ -74,10 +81,9 @@ export default function Form() {
     };
 
     updateLocalStorage(newMeeting);
-    toast('Dein Date ist erstellt worden...', {
-      autoClose: 2000,
-      position: 'bottom-center',
-    });
+
+    toast.success('Dein Date ist erstellt worden...');
+
     setTimeout(() => router.push('/meetings'), 1000);
   }
 
@@ -89,8 +95,16 @@ export default function Form() {
     localStorage.setItem('meetings', JSON.stringify(allMeetings));
   }
 
+  useEffect(() => {
+    validateForm();
+  }, [form]);
+
+  useEffect(() => {
+    setForm({ ...meeting });
+  }, [meeting]);
+
   return (
-    <form onSubmit={handleSubmit}>
+    <form>
       <Stack direction="column" spacing={1}>
         <FormControl fullWidth>
           <TextField
@@ -99,6 +113,7 @@ export default function Form() {
             value={form.title || ''}
             name="title"
             onChange={handleFormChange}
+            size="small"
           />
         </FormControl>
         <FormControl fullWidth>
@@ -110,9 +125,10 @@ export default function Form() {
             id="location-select"
             displayEmpty
             required
+            size="small"
           >
             <MenuItem disabled value="">
-              <em>Standort</em>
+              Standort *
             </MenuItem>
             <MenuItem value="stadtpark">Stadtpark</MenuItem>
             <MenuItem value="elbe">Elbe</MenuItem>
@@ -128,9 +144,10 @@ export default function Form() {
             id="activity-select"
             displayEmpty
             required
+            size="small"
           >
             <MenuItem disabled value="">
-              <em>Aktivität</em>
+              Aktivität *
             </MenuItem>
             <MenuItem value="gassigehen">Gassi gehen</MenuItem>
             <MenuItem value="sport">Sport</MenuItem>
@@ -189,30 +206,43 @@ export default function Form() {
         <FormControl fullWidth>
           <TextField
             id="datetime-local"
-            label="Datum und Uhrzeit"
+            label="Datum und Uhrzeit *"
             type="datetime-local"
             name="date"
             value={form.date || ''}
             onChange={handleFormChange}
+            size="small"
             sx={{ width: 250 }}
             InputLabelProps={{
               shrink: true,
             }}
             fullWidth
-            InputProps={{ inputProps: { min: today } }}
+            InputProps={{
+              inputProps: { min: moment().format('YYYY-MM-DDThh:00:00') },
+            }}
           />
         </FormControl>
       </Stack>
-      <Box mt="24px" display="flex" justifyContent="center">
-        <Button
-          style={{ minWidth: '50%' }}
-          variant="contained"
-          endIcon={<Icon path={mdiSend} title="Send" size={1} />}
-          onClick={handleSubmit}
-        >
-          Absenden
-        </Button>
-      </Box>
+      {!meeting && (
+        <Box mt="24px" display="flex" justifyContent="center">
+          <Button
+            style={{ minWidth: '50%' }}
+            variant="contained"
+            endIcon={<Icon path={mdiSend} title="Send" size={1} />}
+            onClick={handleSubmit}
+            disabled={!isValid}
+          >
+            Absenden
+          </Button>
+        </Box>
+      )}
     </form>
   );
 }
+
+const StyledTextareaAutosize = styled(TextareaAutosize)`
+  padding: 8px;
+  margin-bottom: 5px;
+`;
+
+export default Form;

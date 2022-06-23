@@ -28,7 +28,7 @@ function App({ Component, pageProps }) {
           <StyledFooter>
             <NavBar />
           </StyledFooter>
-          <ToastContainer />
+          <ToastContainer position="bottom-center" autoClose={2000} />
         </StyledLayout>
       </ThemeProvider>
     </>
@@ -49,7 +49,9 @@ const StyledHeader = styled.header`
 `;
 
 const StyledMain = styled.main`
+  display: flex;
   flex: 1;
+  flex-direction: column;
   padding: 0 8px 70px;
 `;
 

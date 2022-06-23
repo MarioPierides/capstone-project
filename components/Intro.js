@@ -32,8 +32,8 @@ const StyledIntro = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  position: relative;
   margin-top: 10px;
+  position: relative;
 
   p + p {
     margin-top: 8px;
@@ -41,5 +41,6 @@ const StyledIntro = styled.section`
 `;
 
 const Paragraph = styled.p`
+  font-size: 1.2rem;
   text-align: center;
 `;

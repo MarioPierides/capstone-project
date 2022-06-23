@@ -33,8 +33,6 @@ function Card({ meeting }) {
   );
 }
 
-export default Card;
-
 const CardContent = styled.div`
   border-radius: 4px;
   border: 1px solid black;
@@ -58,3 +56,5 @@ const CardElement = styled.div`
     margin-left: 2px;
   }
 `;
+
+export default Card;

@@ -1,47 +1,47 @@
-import { useState } from 'react';
-import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  Button,
-} from '@mui/material';
 import Link from 'next/link';
 import styled from 'styled-components';
+import { Typography } from '@mui/material';
 
 import Card from '../components/Card';
 
 function MeetingsList({ meetingsList }) {
   return (
     <>
-      <StyledMeetingsList>
-        {meetingsList.map(meeting => {
-          return (
-            <Link href={`/meetings/${meeting.id}`} key={meeting.id}>
-              <StyledLink>
-                <StyledAnchor>
-                  <Card meeting={meeting} />
-                </StyledAnchor>
-              </StyledLink>
-            </Link>
-          );
-        })}
-      </StyledMeetingsList>
-      {/* <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Bearbeite dein Meeting</DialogTitle>
-        <DialogContent>
-          <div>Test</div>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Abbrechen</Button>
-          <Button onClick={handleClose}>Speichern</Button>
-        </DialogActions>
-      </Dialog> */}
+      {meetingsList.length === 0 ? (
+        <StyledEmptyMeetingList>
+          <Typography variant="h6">Keine Meetings vorhanden.</Typography>
+        </StyledEmptyMeetingList>
+      ) : (
+        <StyledMeetingsList>
+          {meetingsList.map(meeting => {
+            return (
+              <Link href={`/meetings/${meeting.id}`} key={meeting.id}>
+                <StyledLink>
+                  <a>
+                    <Card meeting={meeting} />
+                  </a>
+                </StyledLink>
+              </Link>
+            );
+          })}
+        </StyledMeetingsList>
+      )}
     </>
   );
 }
 
-export default MeetingsList;
+const StyledEmptyMeetingList = styled.div`
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  flex: 1;
+`;
+
+const StyledMeetingsList = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+`;
 
 const StyledLink = styled.li`
   min-height: 100px;
@@ -58,10 +58,4 @@ const StyledLink = styled.li`
   }
 `;
 
-const StyledAnchor = styled.a``;
-
-const StyledMeetingsList = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0;
-`;
+export default MeetingsList;

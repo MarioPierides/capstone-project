@@ -1,5 +1,5 @@
 export function capitalFirstLetter(word) {
-  if (word.length === 0) {
+  if (!word || word.length === 0) {
     return '';
   }
 

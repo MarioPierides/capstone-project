@@ -3,6 +3,14 @@ import styled from 'styled-components';
 
 import logo from '../public/assets/images/logo.png';
 
+function Header() {
+  return (
+    <StyledHeader>
+      <Image src={logo} alt="Logo" width={60} height={54} />
+    </StyledHeader>
+  );
+}
+
 const StyledHeader = styled.div`
   align-items: center;
   display: flex;
@@ -10,10 +18,4 @@ const StyledHeader = styled.div`
   padding: 6px 0;
 `;
 
-export default function Header() {
-  return (
-    <StyledHeader>
-      <Image src={logo} alt="Logo" width={60} height={54} />
-    </StyledHeader>
-  );
-}
+export default Header;
